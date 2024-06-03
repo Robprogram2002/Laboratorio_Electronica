@@ -1,0 +1,31 @@
+int pin = 2;
+int prev = 0;
+int current;
+unsigned long startTime;
+unsigned long currentTime;
+const unsigned long period = 10000;
+int counter = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pin, INPUT);
+  startTime = millis();  //initial start time
+}
+
+void loop() {
+  do {
+    currentTime = millis();
+    current = digitalRead(pin);
+
+    if (current != prev ) {
+      counter += 1;
+      prev = current;
+    }
+
+  } while (currentTime - startTime < period);
+
+  Serial.println((float)counter/20.0);
+  counter = 0;
+  startTime = currentTime;
+
+}

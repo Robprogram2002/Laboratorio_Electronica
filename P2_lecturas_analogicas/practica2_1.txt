@@ -1,0 +1,12 @@
+int led = 3;
+int potenciometro = A0;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  int lectura = analogRead(potenciometro)/4; // 0-255
+  analogWrite(led, lectura);
+  delay(200);
+}

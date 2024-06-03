@@ -1,0 +1,31 @@
+#include <U8g2lib.h>
+int scl = 5;
+int sda = 4;
+
+// Inicialización de la pantalla OLED SH1106 128x64
+U8G2_SH1106_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, scl, sda, U8X8_PIN_NONE);
+
+void setup() {
+  u8g2.begin();  // inicialización de la comunicación con la pantalla
+}
+
+void loop() {
+
+  u8g2.clearBuffer();
+  u8g2.setFont(u8g2_font_ncenB14_tr);
+  u8g2.drawStr(0, 20, "Hello World!");
+  u8g2.sendBuffer();
+
+  delay(1000);
+  u8g2.clearBuffer();
+
+
+  // // Dibujar una carita
+  u8g2.drawCircle(64, 32, 20, U8G2_DRAW_ALL);      // cara
+  u8g2.drawDisc(54, 26, 2, U8G2_DRAW_ALL);         // Ojo izquierdo
+  u8g2.drawDisc(74, 26, 2, U8G2_DRAW_ALL);         // Ojo derecho
+  u8g2.drawEllipse(64, 38, 10, 4, U8G2_DRAW_ALL);  // Boca
+
+  u8g2.sendBuffer();  // Enviar buffer a la pantalla
+  delay(1000);
+}
